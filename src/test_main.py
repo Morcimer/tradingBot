@@ -23,8 +23,20 @@ class TestImports(unittest.TestCase):
             import yfinance
             import pandas
             import numpy
+            import fastapi
+            import schedule
         except ImportError as e:
             self.fail(f"Required dependency not installed: {e}")
+    
+    def test_bot_initialization(self):
+        """Test that bot can be initialized"""
+        try:
+            bot = main.EMATradingBot(symbol="BTC-USD")
+            self.assertIsNotNone(bot)
+            self.assertEqual(bot.symbol, "BTC-USD")
+        except Exception as e:
+            self.fail(f"Bot initialization failed: {e}")
 
 if __name__ == '__main__':
     unittest.main()
+
